@@ -9,13 +9,14 @@ RUN apt-get update && \
 COPY ./package.json ./package.json
 COPY ./package-lock.json ./package-lock.json
 
+COPY ./prisma .
+
 RUN npm install
+RUN npx prisma generate
 
 COPY . .
 
 RUN npm run build
-RUN npx prisma generate
-
 
 EXPOSE 3000
 
